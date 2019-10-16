@@ -26,13 +26,12 @@ The system uses Kafka for messaging. It produces and consumes from topics
 
 ## Usage
 
-The system needs a kafka instance running on `localhost:9092` and zookeeper
-running on `localhost:2181`
-
-* Make sure you have [Kafka](https://kafka.apache.org/) installed.
+* Make sure you have [Kafka](https://kafka.apache.org/) installed. The kafka
+  instance should be running on `localhost:9092` and the zookeeper instance
+  on `localhost:2181`
 * Create kafka topics: `game`, `query` and `suggestion`
 * Start zookeeper and the kafka server
-* Create a postgres database `chessgame`
+* Create an empty postgres database `chessgame`
 
 Now, start the game fetcher
 
@@ -42,8 +41,8 @@ cd chessmovedb-fetch
 sbt run
 ```
 
-`chessmovedb-fetch` now repeatedly asks for the best game on `lichess.org/tv`,
-waits until its done and then downloads it.
+`chessmovedb-fetch` now repeatedly asks for the best game on `lichess.org/tv`
+(games played in real time) waits until its done and then downloads it.
 
 ```shell
 git clone https://github.com/lsund/chessmovedb-store
