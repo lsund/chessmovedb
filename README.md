@@ -12,11 +12,11 @@ the actual code, check out the components below.
 ## Why?
 
 I wanted to get my hands dirty with scala and Kafka. I did not have much prior
-knowledege with any of those technologies.
+knowledge with any of those technologies.
 
 ## Components
 
-* [chessmovedb-fetch](https://github.com/lsund/chessmovedb-fetch) for fetching gamedata from lichess
+* [chessmovedb-fetch](https://github.com/lsund/chessmovedb-fetch) for fetching game data from lichess
 * [chessmovedb-store](https://github.com/lsund/chessmovedb-store) for persisting
   the games to disk
 * [chessmovedb-ui](https://github.com/lsund/chessmovedb-ui) the user interface (CLI)
@@ -42,7 +42,9 @@ sbt run
 ```
 
 `chessmovedb-fetch` now repeatedly asks for the best game on `lichess.org/tv`
-(games played in real time) waits until its done and then downloads it.
+(games played in real time) waits until its done and then downloads it. One game
+should be downloaded every 2-10 minutes, so you don't have to be afraid that
+this program floods your hard-disk.
 
 ```shell
 git clone https://github.com/lsund/chessmovedb-store
@@ -50,7 +52,7 @@ cd chessmovedb-fetch
 sbt run
 ```
 
-`chessmovedb-store` processses the downloaded games, and stores them in
+`chessmovedb-store` processes the downloaded games, and stores them in
 postgres.
 
 #### Shell 3
