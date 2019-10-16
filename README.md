@@ -29,35 +29,43 @@ The system uses Kafka for messaging. It produces and consumes from topics
 The system needs a kafka instance running on `localhost:9092` and zookeeper
 running on `localhost:2181`
 
-Make sure you have [Kafka](https://kafka.apache.org/) installed.
+* Make sure you have [Kafka](https://kafka.apache.org/) installed.
+* Create kafka topics: `game`, `query` and `suggestion`
+* Start zookeeper and the kafka server
+* Create a postgres database `chessgame`
 
-```shell
-zkServer.sh start
-/usr/bin/kafka-server-start.sh -daemon /etc/kafka/server.properties
-# Create the topic
-/usr/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic game
-/usr/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic query
-/usr/bin/kafka-topics.sh --create --zookeeper localhost:2181
---replication-factor 1 --partitions 1 --topic suggestion
-```
-
-#### Shell 1
+Now, start the game fetcher
 
 ```shell
 git clone https://github.com/lsund/chessmovedb-fetch
+cd chessmovedb-fetch
 sbt run
 ```
 
-#### Shell 2
+`chessmovedb-fetch` now repeatedly asks for the best game on `lichess.org/tv`,
+waits until its done and then downloads it.
 
 ```shell
 git clone https://github.com/lsund/chessmovedb-store
+cd chessmovedb-fetch
 sbt run
 ```
+
+`chessmovedb-store` processses the downloaded games, and stores them in
+postgres.
+
 #### Shell 3
 
 ```shell
-git clone https://github.com/lsund/chessmovedb-fetch
+git clone https://github.com/lsund/chessmovedb-ui
+cd chessmovedb-fetch
 sbt clean assembly
+```
+
+The ui component has a command line interface, we can test it by invoking the
+jar. This command would ask the system for the next move given that e4, d6 and
+`d4` have been played.
+
+```shell
 java -jar target/scala-2.12/chessmovedb-ui-assembly-1.0.0.jar --moves 'e4 d6 d4'
 ```
