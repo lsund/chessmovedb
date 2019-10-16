@@ -1,7 +1,8 @@
 # chessmovedb
 
 Pulls game from lichess.org, processes and perists them to disk. Lets the user
-query a sequence of starting moves and suggests the next move to be played.
+query a sequence of starting moves and suggests the next move to be played. This repository 
+contains nothing; the application is made up of the components below.
 
 ## Components
 
