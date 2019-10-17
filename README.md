@@ -68,3 +68,12 @@ that e4, d6 and d4 have been played.
 ```shell
 java -jar target/scala-2.12/chessmovedb-ui-assembly-1.0.0.jar --moves 'e4 d6 d4'
 ```
+
+## FAQ
+
+Q: Why just not use an existing database or download all the games for a given
+user?
+
+A: The point of this experimental system is real-time data
+processing. Repeatedly downloading the best games played on lichess in realtime
+is a fine use-case, even though the data throughput is minimal.
